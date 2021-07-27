@@ -1,0 +1,14 @@
+POST http://localhost:8000/create-project-from-dull
+Content-Type: application/json
+
+{
+  "dull": {
+    "provider_type": "gitlab",
+    "project_id": 34
+  },
+  "new": {
+    "provider_type": "gitlab",
+    "name": "clone",
+    "group_id": 36
+  }
+}

@@ -1,0 +1,27 @@
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    hostname: 'localhost'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['initial_root_password'] = 'adminadmin'
+        external_url 'https://localhost'
+    ports:
+      - '80:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - ./_data/config:/etc/gitlab
+      - ./_data/data:/var/opt/gitlab
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    ports:
+      - '8000:8000'
+    environment:
+      APP_HTTP_PORT: ":8000"
+      APP_GITLAB_TOKEN: "7nweWwso2D_xrDwqy2h7"
+      APP_GITLAB_BASE_URL: "https://localhost"
